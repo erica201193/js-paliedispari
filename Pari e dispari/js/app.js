@@ -5,22 +5,64 @@
 // Stabiliamo se la somma dei due numeri è pari o dispari (usando una funzione)
 // Dichiariamo chi ha vinto. Se l’utente aveva scelto pari e la somma è pari, ha vinto l’utente, altrimenti il computer
 
-const sceltaUtente = prompt ("Scegli tra PARI e DISPARI, poi scrivi la tua scelta");
+let sceltaGioco;
+let userChoice = false;
 
-const numeroUtente = prompt ("Scegli un numero da 1 a 5, poi scrivi la tua scelta");
+while (userChoice === false) {
+    sceltaGioco = prompt ("Pari o Dispari ?")
 
-function randomComputerNumber() {
-    let randomNumber = Math.floor(Math.random() * 5) + 1;
-
-    return randomNumber
+    if (sceltaGioco == "pari" || sceltaGioco == "dispari") {
+        userChoice = true;
+    } else {
+        alert("Inserisci una scelta valida")
+    }
 }
 
-function somma(numeroUtente, randomComputerNumber) {
+let numeroScelto;
+let numberChoice = false;
 
-    const sommaNumeri = numeroUtente + randomComputerNumber
+while (numberChoice === false) {
+    numeroScelto = parseInt(prompt ("Fantastico! Ora inserisci un numero da 1 a 5"))
 
-    return sommaNumeri
+    if (numeroScelto > 0 && numeroScelto < 6 && !NaN && !null) {
+        numberChoice = true;
+    } else {
+        alert("Inserisci un numero valido")
+    }
 }
 
-console.log(randomComputerNumber)
-console.log(somma)
+console.log("Il numero scelto dell'umano è: " + numeroScelto);
+
+
+
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min)
+}
+
+let computerNumber = randomNumber(1, 5);
+
+console.log("Il numero random del computer è: " + computerNumber);
+
+const somma = numeroScelto + computerNumber;
+
+console.log("La somma dei due numeri è: " + somma);
+
+function pari_dispari(num) {
+    if (num % 2 == 0) {
+        return "pari"
+    } else {
+        return "dispari"
+    }
+}
+
+const pariOdispari = pari_dispari(somma);
+
+console.log("Il numero " + somma + " è " + pariOdispari);
+
+if (sceltaGioco == "pari" && pariOdispari == "pari") {
+    alert(`Hai scelto ${sceltaGioco} e il numero che hai inserito è ${numeroScelto}. L'Ai ha scelto invece ${computerNumber}. ${numeroScelto} + ${computerNumber} = ${somma}, ovvero un numero ${pariOdispari}. HAI VINTO!`)
+} else if (sceltaGioco == "dispari" && pariOdispari == "dispari") {
+    alert (`Hai scelto ${sceltaGioco} e il numero che hai inserito è ${numeroScelto}. L'Ai ha scelto invece ${computerNumber}. ${numeroScelto} + ${computerNumber} = ${somma}, ovvero un numero ${pariOdispari}. HAI VINTO!`)
+} else {
+    alert (`Hai scelto ${sceltaGioco} e il numero che hai inserito è ${numeroScelto}. L'Ai ha scelto invece ${computerNumber}. ${numeroScelto} + ${computerNumber} = ${somma}, ovvero un numero ${pariOdispari}. HAI PERSO :'(`)
+}
